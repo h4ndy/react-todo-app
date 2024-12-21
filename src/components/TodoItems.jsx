@@ -1,4 +1,4 @@
-import React from "react";
+
 import tick from "../assets/tick.png";
 import not_tick from "../assets/not_tick.png";
 import delete_icon from "../assets/delete.png";
