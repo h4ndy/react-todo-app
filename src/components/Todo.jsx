@@ -75,6 +75,16 @@ const Todo = () => {
     });
   };
 
+  //edit task
+  const editTodo = (id, newText) => {
+    const text = newText.trim();
+    if (text === "") return;
+
+    setTodoList((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+    );
+  };
+
   //add group
   const addGroup = () => {
     const name = groupInputRef.current.value.trim();
@@ -87,6 +97,16 @@ const Todo = () => {
     setGroups((prev) => [...prev, newGroup]);
     setSelectedGroup(newGroup.id);
     groupInputRef.current.value = "";
+  };
+
+  //rename group
+  const renameGroup = (groupId, newName) => {
+    const name = newName.trim();
+    if (name === "") return;
+
+    setGroups((prev) =>
+      prev.map((group) => (group.id === groupId ? { ...group, name } : group))
+    );
   };
 
   //delete group, its tasks move to the default group
@@ -231,7 +251,9 @@ const Todo = () => {
               group={group}
               todos={todoList.filter((todo) => todo.groupId === group.id)}
               deleteGroup={group.id === DEFAULT_GROUP.id ? null : deleteGroup}
+              renameGroup={renameGroup}
               deleteTodo={deleteTodo}
+              editTodo={editTodo}
               toggle={toggle}
             />
           ))}
